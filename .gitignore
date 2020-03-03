@@ -1,0 +1,6 @@
+*.jpeg
+output/
+*.ipynb
+stats/
+.ipynb_checkpoints/
+.idea/
