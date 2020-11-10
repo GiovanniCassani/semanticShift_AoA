@@ -5,3 +5,6 @@ stats/
 .ipynb_checkpoints/
 .idea/
 plots/
+extraLiterature/
+submissions/
+src/R/futureModels/
