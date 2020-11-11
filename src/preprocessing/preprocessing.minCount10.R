@@ -27,12 +27,14 @@ for (d in dims) {
 rm(i, window_sizes, dims, w, d)
 
 # read all the resources containing covariates
-aoa = read_excel("/Volumes/University/TiU/Research/Resources/AoA/AoA_ratings_from_all_sources.xlsx", 
-                 sheet = 'Kuperman et al.')
-concreteness = read.csv("/Volumes/University/TiU/Research/Resources/Brysbaert_concreteness.txt", 
-                        header = T, sep = '\t')
-subtlex = read.csv("/Volumes/University/TiU/Research/Resources/SUBTLEX/SUBTLEX-US.txt", 
-                   header = T, sep = '\t')
+# aoa_path = download the appropriate file at http://crr.ugent.be/archives/806
+# concreteness path = download the file at the following url http://crr.ugent.be/papers/Concreteness_ratings_Brysbaert_et_al_BRM.txt
+# subtlex_path = fownload the file at the following url https://www.ugent.be/pp/experimentele-psychologie/en/research/documents/subtlexus/subtlexus2.zip
+# and provide the appropriate local paths
+
+aoa = read_excel(aoa_path, sheet = 'Kuperman et al.')
+concreteness = read.csv(concreteness_path, header = T, sep = '\t')
+subtlex = read.csv(subtlex_path, header = T, sep = '\t')
 old_len = read.csv("data/word_OLD_len.csv", header = T, sep = '\t')
 coha_freqs = read.csv("data/word_freq.csv", header = T, sep = ',')
 coha_freqs = coha_freqs %>%

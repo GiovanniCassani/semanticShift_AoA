@@ -9,9 +9,7 @@ Content
 =======
 
 The project code has been separated in three different folders:
-All the necessary datasets are provided in the folder **data/**, whereas the folder **src/**
-contains Python code to read relevant resources to compute OLD20 for the target words as well as R code to
-run linear models and generate the plots included in the paper.
+All the necessary datasets are provided in the folder **data/**, whereas the folder **src/** contains Python code to read relevant resources to compute OLD20 for the target words as well as R code to preprocess raw data to generate input files for the statistical analyses, run linear models and generate the plots included in the paper.
 Finally, the code to compute the semantic change measures is available under the **measures** folder.
 
 Temporal Embeddings with A Compass
@@ -30,6 +28,10 @@ Requirements
 + scipy
 + numpy
 + cade (refer to the `TWEC`_ page)
++ old20 (https://github.com/stephantul/old20)
++ SUBTLEX-US (https://www.ugent.be/pp/experimentele-psychologie/en/research/documents/subtlexus/subtlexus2.zip)
++ Age of Acquisition norms by Kuperman et al (http://crr.ugent.be/archives/806)
++ concreteness norms by Brysbaert et al (http://crr.ugent.be/papers/Concreteness_ratings_Brysbaert_et_al_BRM.txt)
 
 
 Authors
