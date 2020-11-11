@@ -9,10 +9,10 @@ Content
 =======
 
 The project code has been separated in three different folders:
-All the necessary datasets are provided in the folder `data/`, whereas the folder `src/`
+All the necessary datasets are provided in the folder **data/**, whereas the folder **src/**
 contains Python code to read relevant resources to compute OLD20 for the target words as well as R code to
 run linear models and generate the plots included in the paper.
-Finally, the code to compute the semantic change measures is available under the `measures` folder.
+Finally, the code to compute the semantic change measures is available under the **measures** folder.
 
 To create the aligned embeddings, it is necessary to obtain the `CoHA`_ corpus. Then, the  `TWEC`_ embedding alignment algorithm can be used to aling
 the slices. It is enough to split the COHA data in 5 sets: 1800-1840, 1840-1880, 1880-1920, 1920-1960,
