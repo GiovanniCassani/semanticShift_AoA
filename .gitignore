@@ -15,3 +15,6 @@ data/raw/
 data/targetWords.json
 data/word_freq.csv
 data/word_OLD_len.csv
+src/R/._*
+src/R/preprocessing/._*
+src/R/linearModels/._*
