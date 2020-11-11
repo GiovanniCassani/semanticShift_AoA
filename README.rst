@@ -4,7 +4,7 @@ Semantic Shift & Age of Acquisition
 
 This repository contains code detailing the analyses performed for the CogSci paper 'Words with consistent diachronic usage patterns are learned earlier. A computational analysis using temporally aligned word embeddings'.
 
-=======
+
 Content
 =======
 
@@ -14,12 +14,24 @@ contains Python code to read relevant resources to compute OLD20 for the target 
 run linear models and generate the plots included in the paper.
 Finally, the code to compute the semantic change measures is available under the **measures** folder.
 
+Temporal Embeddings with A Compass
+==================================
+
 To create the aligned embeddings, it is necessary to obtain the `CoHA`_ corpus. Then, the  `TWEC`_ embedding alignment algorithm can be used to aling
 the slices. It is enough to split the COHA data in 5 sets: 1800-1840, 1840-1880, 1880-1920, 1920-1960,
 1960-2000. You should manually pre-process the text before using TWEC (we used spacy to do this).
 
+Follow the instruction on the `TWEC`_ to install the tool.
 
-=======
+Requirements
+============
+
++ pandas
++ scipy
++ numpy
++ cade (refer to the `TWEC`_ page)
+
+
 Authors
 =======
 
