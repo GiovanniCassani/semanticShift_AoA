@@ -28,6 +28,7 @@ box_cox_transf <- function(x, min, max) {
   return(x.transf)
 }
 
+setwd(sub("src.*", "", getwd()))
 
 ##### d=40, w=3, minCount=10 #####
 df = read.csv("data/processed/LNC.fixed.minCount10/semanticShift_d40_w3.csv", 
@@ -328,3 +329,4 @@ AIC(lm.rVC)
 summary(lm.rVC)$r.sq
 summary(lm.rVC)
 base.aic - AIC(lm.rVC)
+

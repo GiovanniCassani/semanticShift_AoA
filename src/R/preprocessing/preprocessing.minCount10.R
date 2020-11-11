@@ -6,6 +6,8 @@ library(MASS)
 window_sizes = c(3, 5, 20)
 dims = c(40, 100)
 
+setwd(sub("src.*", "", getwd()))
+
 # create directories to store processed data
 dir.create("data/processed")
 dir.create("data/processed/LNC.fixed.minCount10")
@@ -25,11 +27,14 @@ for (d in dims) {
 rm(i, window_sizes, dims, w, d)
 
 # read all the resources containing covariates
-aoa = read_excel("Resources/AoA/AoA_ratings_from_all_sources.xlsx", sheet = 'Kuperman et al.')
-concreteness = read.csv("Resources/Brysbaert_concreteness.txt", header = T, sep = '\t')
-subtlex = read.csv("Resources/SUBTLEX/SUBTLEX-US.txt", header = T, sep = '\t')
-old_len = read.csv("Projects/semanticShift/data/word_OLD_len.csv", header = T, sep = '\t')
-coha_freqs = read.csv("Projects/semanticShift/data/word_freq.csv", header = T, sep = ',')
+aoa = read_excel("/Volumes/University/TiU/Research/Resources/AoA/AoA_ratings_from_all_sources.xlsx", 
+                 sheet = 'Kuperman et al.')
+concreteness = read.csv("/Volumes/University/TiU/Research/Resources/Brysbaert_concreteness.txt", 
+                        header = T, sep = '\t')
+subtlex = read.csv("/Volumes/University/TiU/Research/Resources/SUBTLEX/SUBTLEX-US.txt", 
+                   header = T, sep = '\t')
+old_len = read.csv("data/word_OLD_len.csv", header = T, sep = '\t')
+coha_freqs = read.csv("data/word_freq.csv", header = T, sep = ',')
 coha_freqs = coha_freqs %>%
   dplyr::rename(
     Word = word,
@@ -75,5 +80,4 @@ for (i in 1:length(source_paths)) {
                           LNC.SUM, rLNC.SUM, LNC1.SUM, VC.SUM, J.SUM, rVC.SUM, rJ.SUM), 
             destination_paths[i], row.names = FALSE)
 }
-
 rm(list = ls())

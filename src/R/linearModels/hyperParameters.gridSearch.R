@@ -5,6 +5,7 @@ library(plyr)
 library(ggplot2)
 library(Rmisc)
 library(RColorBrewer)
+library(MASS)
 
 
 # get the top half of a correlation matrix
@@ -31,7 +32,25 @@ box_cox_transf <- function(x, min, max) {
 
 pd = position_dodge(0.1)
 # define whether to consider the measures derived with a min_count of 10 or a min_count of 0
-min.count = 10
+min.count = 0
+
+setwd(sub("src.*", "", getwd()))
+
+parent_dir = "plots/"
+if (file.exists(parent_dir)){
+  print(sprintf("dir %s already exists.", parent_dir))
+} else {
+  dir.create(parent_dir)
+  print(sprintf("dir %s has been created.", parent_dir))
+}
+
+dir = sprintf("plots/minCount_%s/", min.count)
+if (file.exists(dir)){
+  print(sprintf("dir %s already exists.", dir))
+} else {
+  dir.create(dir)
+  print(sprintf("dir %s has been created.", dir))
+}
 
 # define possible values for window size and embedding dimensionality
 window_sizes = c(3, 5, 20)
@@ -41,7 +60,7 @@ stats = NULL
 # consider all combinations of window size and embedding dimensionality, reading the data and
 # fitting the target linear models, storing summary statistics in a df
 for (d in dims) {
-  
+
   # create folders and sub-folders to store correlation plots
   directory = sprintf("plots/minCount_%s/d%s/", min.count, d)
   if (file.exists(directory)){
@@ -84,8 +103,6 @@ for (d in dims) {
     df$rVC.z = scale(box_cox_transf(df$rVC.SUM, -10, 10), center = T, scale = T)
     df$rLNC.z = scale(box_cox_transf(df$rLNC.SUM, -10, 10), center = T, scale = T)
     
-    str(df)
-  
     ##### LNC #####
     lm.LNC = lm(AoA ~ F.z + C.z + CD.z + OLD.z + L.z + Dom_Pos + FpM.z + LNC.z, data = df)
     var = "LNC"
@@ -171,6 +188,7 @@ for (d in dims) {
         legend.direction = "horizontal")+
       guides(fill = guide_colorbar(barwidth = 7, barheight = 1,
                                    title.position = "top", title.hjust = 0.5))
+    print(getwd())
     ggsave("corrMatrix.pdf", plot = last_plot(), device = "pdf", 
            path = subdirectory, width = 18, height = 18, units = "cm")
     

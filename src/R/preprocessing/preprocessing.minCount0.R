@@ -8,6 +8,8 @@ library(MASS)
 window_sizes = c(3, 5, 20)
 dims = c(40, 100)
 
+setwd(sub("src.*", "", getwd()))
+
 # create directories to store processed data
 dir.create("data/processed")
 dir.create("data/processed/LNC.fixed.minCount0")
@@ -19,20 +21,24 @@ destination_paths = NULL
 i = 1
 for (d in dims) {
   for (w in window_sizes) {
-    source_paths_LNC[i] = sprintf("Projects/semanticShift/data/raw/LNC.fixed.minCount0/%s_%s_results_fixed_lnc2.csv", d, w)
-    source_paths_J.VC[i] = sprintf("Projects/semanticShift/data/raw/LNC.fixed.minCount0/%s_%s_results.csv", d, w)
-    destination_paths[i] = sprintf("Projects/semanticShift/data/processed/LNC.fixed.minCount0/semanticShift_d%s_w%s.csv", d, w)
+    source_paths_LNC[i] = sprintf("data/raw/LNC.fixed.minCount0/%s_%s_results_fixed_lnc2.csv", d, w)
+    source_paths_J.VC[i] = sprintf("data/raw/LNC.fixed.minCount0/%s_%s_results.csv", d, w)
+    destination_paths[i] = sprintf("data/processed/LNC.fixed.minCount0/semanticShift_d%s_w%s.csv", d, w
+      )
     i = i+1
   }
 }
 rm(i, window_sizes, dims, w, d)
 
 # read all the resources containing covariates
-aoa = read_excel("Resources/AoA/AoA_ratings_from_all_sources.xlsx", sheet = 'Kuperman et al.')
-concreteness = read.csv("Resources/Brysbaert_concreteness.txt", header = T, sep = '\t')
-subtlex = read.csv("Resources/SUBTLEX/SUBTLEX-US.txt", header = T, sep = '\t')
-old_len = read.csv("Projects/semanticShift/data/word_OLD_len.csv", header = T, sep = '\t')
-coha_freqs = read.csv("Projects/semanticShift/data/word_freq.csv", header = T, sep = ',')
+aoa = read_excel("/Volumes/University/TiU/Research/Resources/AoA/AoA_ratings_from_all_sources.xlsx", 
+                 sheet = 'Kuperman et al.')
+concreteness = read.csv("/Volumes/University/TiU/Research/Resources/Brysbaert_concreteness.txt", 
+                        header = T, sep = '\t')
+subtlex = read.csv("/Volumes/University/TiU/Research/Resources/SUBTLEX/SUBTLEX-US.txt", 
+                   header = T, sep = '\t')
+old_len = read.csv("data/word_OLD_len.csv", header = T, sep = '\t')
+coha_freqs = read.csv("data/word_freq.csv", header = T, sep = ',')
 
 df.LNC = read.csv(source_paths_LNC[1], header = T, sep = ',')
 df.J_VC = read.csv(source_paths_J.VC[1], header = T, sep = ',')
@@ -74,7 +80,8 @@ for (i in 1:length(source_paths_LNC)) {
   # merge datasets aligning at the word and select only the relevant variables
   tmp1 = merge(aoa, concreteness, by = 'Word')
   tmp2 = merge(tmp1, subtlex, by = 'Word')
-  tmp3 = merge(dplyr::select(tmp2, Word, Rating.Mean, Conc.M, FREQcount, CDcount, Dom_Pos), old_len, by = 'Word')
+  tmp3 = merge(dplyr::select(tmp2, Word, Rating.Mean, Conc.M, FREQcount, CDcount, Dom_Pos), 
+               old_len, by = 'Word')
   tmp4 = merge(tmp3, dplyr::select(coha_freqs, Word, FpM.SUM), by = "Word")
   tmp5 = merge(tmp4, dplyr::select(LNC, Word, LNC.SUM, rLNC.SUM, LNC1.SUM), by = "Word")
   df = merge(tmp5, dplyr::select(J_VC, Word, J.SUM, rJ.SUM, VC.SUM, rVC.SUM), by = 'Word')
@@ -88,8 +95,9 @@ for (i in 1:length(source_paths_LNC)) {
     )
 
   write.csv(dplyr::select(df, 
-                          Word, AoA, Concr, Freq, CD, Dom_Pos, OLD20, len, FpM.SUM, LNC.SUM, rLNC.SUM, 
-                          LNC1.SUM, VC.SUM, J.SUM, rVC.SUM, rJ.SUM), destination_paths[i], row.names = FALSE)
+                          Word, AoA, Concr, Freq, CD, Dom_Pos, OLD20, len, FpM.SUM, LNC.SUM, 
+                          rLNC.SUM, LNC1.SUM, VC.SUM, J.SUM, rVC.SUM, rJ.SUM), 
+            destination_paths[i], row.names = FALSE)
 }
 
 rm(list = ls())

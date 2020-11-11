@@ -5,6 +5,7 @@ library(plyr)
 library(ggplot2)
 library(Rmisc)
 library(RColorBrewer)
+library(MASS)
 
 # get the upper half of a correlation matrix
 get_upper_tri <- function(cormat){
@@ -28,6 +29,8 @@ box_cox_transf <- function(x, min, max) {
 }
 
 pd = position_dodge(0.1)
+
+setwd(sub("src.*", "", getwd()))
 
 # define frequency thresholds to consider
 thresholds = c(25, 50, 75, 100)

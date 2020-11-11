@@ -2,8 +2,10 @@ library(ggplot2)
 library(RColorBrewer)
 library(dplyr)
 
-VC.high = read.csv("data/plots/VC_export_high.csv", header = T, sep=',')
-VC.low = read.csv("data/plots/VC_export_low.csv", header = T, sep=',')
+setwd(sub("src.*", "", getwd()))
+
+VC.high = read.csv("data/visualisations/VC_export_high.csv", header = T, sep=',')
+VC.low = read.csv("data/visualisations/VC_export_low.csv", header = T, sep=',')
 VC.high$VC= 'high'
 VC.low$VC = 'low'
 
@@ -12,16 +14,6 @@ VC = rbind(VC.high, VC.low)
 VC$slice = as.factor(VC$slice)
 
 VC.colors = c("#D9B3FF", "#C28FE0", "#AB6BC2", "#9448A3", "#7D2485", "#660066")
-
-ggplot(data = VC.high[VC.high$word %in% c('finger', 'thunder'),], 
-       aes(x=x, y=y, fill=slice, color=slice)) +
-  geom_point(size=2) +
-  facet_grid(. ~ word)
-
-ggplot(data = VC.low[VC.low$word %in% c('recorder', 'pregnant'),], 
-       aes(x=x, y=y, fill=slice, color=slice)) +
-  geom_point(size=2) +
-  facet_grid(. ~ word)
 
 ggplot(data = VC[VC$word %in% c('recorder', 'pregnant', 'finger', 'thunder'),], 
        aes(x=x, y=y, fill=slice, color=slice)) +
@@ -39,9 +31,9 @@ ggplot(data = VC[VC$word %in% c('recorder', 'pregnant', 'finger', 'thunder'),],
 
 
 
-LNC.high = read.csv("data/plots/LNC_export_high.csv", header = T, sep=',')
+LNC.high = read.csv("data/visualisations/LNC_export_high.csv", header = T, sep=',')
 LNC.high = dplyr::distinct(LNC.high)
-LNC.low = read.csv("data/plots/LNC_export_low.csv", header = T, sep=',')
+LNC.low = read.csv("data/visualisations/LNC_export_low.csv", header = T, sep=',')
 LNC.low = dplyr::distinct(LNC.low)
 
 LNC.high$year = as.factor(LNC.high$year)
@@ -70,6 +62,22 @@ ggplot(data = LNC.evening, aes(x=neighbor, y=cosine, fill = neighbor, color=neig
   ylab("cosine") +
   xlab("neighbors") +
   ggtitle(sprintf("Local Neighborhood Coherence: %s", LNC.evening$word)) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(),
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) +
+  guides(colour = guide_legend(nrow = 2))
+
+ggplot(data = LNC.aids, aes(x=neighbor, y=cosine, fill = neighbor, color=neighbor)) +
+  geom_col() +
+  facet_grid(. ~ year) +
+  scale_color_brewer(palette = "Set2") +
+  scale_fill_brewer(palette = "Set2") +
+  ylab("cosine") +
+  xlab("neighbors") +
+  ggtitle(sprintf("Local Neighborhood Coherence: %s", LNC.aids$word)) +
   theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
