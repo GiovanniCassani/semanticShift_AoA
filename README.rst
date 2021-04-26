@@ -4,6 +4,8 @@ Semantic Shift & Age of Acquisition
 
 This repository contains code detailing the analyses performed for the CogSci paper 'Words with consistent diachronic usage patterns are learned earlier. A computational analysis using temporally aligned word embeddings'.
 
+Reference
+=========
 
 ::
 
@@ -19,7 +21,7 @@ This repository contains code detailing the analyses performed for the CogSci pa
   url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/cogs.12963},
   eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1111/cogs.12963},
   year = {2021}
-}
+  }
 
 
 
