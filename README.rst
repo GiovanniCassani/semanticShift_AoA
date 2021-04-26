@@ -5,6 +5,24 @@ Semantic Shift & Age of Acquisition
 This repository contains code detailing the analyses performed for the CogSci paper 'Words with consistent diachronic usage patterns are learned earlier. A computational analysis using temporally aligned word embeddings'.
 
 
+::
+
+  @article{https://doi.org/10.1111/cogs.12963,
+  author = {Cassani, Giovanni and Bianchi, Federico and Marelli, Marco},
+  title = {Words with Consistent Diachronic Usage Patterns are Learned Earlier: A Computational Analysis Using Temporally Aligned Word Embeddings},
+  journal = {Cognitive Science},
+  volume = {45},
+  number = {4},
+  pages = {e12963},
+  keywords = {Age of acquisition, Language change, Temporally aligned word embeddings, Computational psycholinguistics},
+  doi = {https://doi.org/10.1111/cogs.12963},
+  url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/cogs.12963},
+  eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1111/cogs.12963},
+  year = {2021}
+}
+
+
+
 Content
 =======
 
